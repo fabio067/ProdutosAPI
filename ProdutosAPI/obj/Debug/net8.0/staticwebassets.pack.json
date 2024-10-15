@@ -1,0 +1,41 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\User\\Desktop\\loja\\ProdutosAPI\\ProdutosAPI\\wwwroot\\Images\\lobo.jpg",
+      "PackagePath": "staticwebassets\\Images\\lobo.jpg"
+    },
+    {
+      "Id": "C:\\Users\\User\\Desktop\\loja\\ProdutosAPI\\ProdutosAPI\\wwwroot\\Images\\lookism.jpg",
+      "PackagePath": "staticwebassets\\Images\\lookism.jpg"
+    },
+    {
+      "Id": "C:\\Users\\User\\Desktop\\loja\\ProdutosAPI\\ProdutosAPI\\wwwroot\\Images\\norte.jpg",
+      "PackagePath": "staticwebassets\\Images\\norte.jpg"
+    },
+    {
+      "Id": "C:\\Users\\User\\Desktop\\loja\\ProdutosAPI\\ProdutosAPI\\wwwroot\\Images\\onepiece.jpg",
+      "PackagePath": "staticwebassets\\Images\\onepiece.jpg"
+    },
+    {
+      "Id": "C:\\Users\\User\\Desktop\\loja\\ProdutosAPI\\ProdutosAPI\\wwwroot\\Images\\solo.jpg",
+      "PackagePath": "staticwebassets\\Images\\solo.jpg"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.ProdutosAPI.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.ProdutosAPI.props",
+      "PackagePath": "build\\ProdutosAPI.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.ProdutosAPI.props",
+      "PackagePath": "buildMultiTargeting\\ProdutosAPI.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.ProdutosAPI.props",
+      "PackagePath": "buildTransitive\\ProdutosAPI.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

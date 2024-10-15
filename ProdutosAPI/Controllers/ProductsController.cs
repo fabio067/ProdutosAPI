@@ -13,11 +13,50 @@ namespace ProdutosAPI.Controllers
     {
         private static List<Product> products = ProductData.GetProducts();
 
+        private static List<CartItem> cart = new List<CartItem>();
+
         // GET: api/products
         [HttpGet]
         public ActionResult<IEnumerable<Product>> GetProducts()
         {
             return Ok(products);
         }
+        // POST: api/products/addtocart/{id}
+        [HttpPost("addtocart/{id}")]
+        public IActionResult AddToCart(int id)
+        {
+            var product = products.FirstOrDefault(p => p.Id == id);
+
+            if (product == null)
+            {
+                return NotFound("Produto não encontrado");
+            }
+
+            var cartItem = cart.FirstOrDefault(c => c.ProductId == id);
+
+            if (cartItem != null)
+            {
+                cartItem.Quantity++; // Incrementa a quantidade se já existir no carrinho
+            }
+            else
+            {
+                cart.Add(new CartItem
+                {
+                    ProductId = product.Id,
+                    Name = product.Name,
+                    Price = product.Price,
+                    Quantity = 1
+                });
+            }
+
+            return Ok(cart);
+        }
+        // GET: api/products/cart
+        [HttpGet("cart")]
+        public ActionResult<IEnumerable<CartItem>> GetCartItems()
+        {
+            return Ok(cart);
+        }
     }
 }
+
