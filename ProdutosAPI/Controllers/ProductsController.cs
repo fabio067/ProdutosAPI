@@ -12,7 +12,6 @@ namespace ProdutosAPI.Controllers
     public class ProductsController : ControllerBase
     {
         private static List<Product> products = ProductData.GetProducts();
-
         private static List<CartItem> cart = new List<CartItem>();
 
         // GET: api/products
@@ -21,6 +20,14 @@ namespace ProdutosAPI.Controllers
         {
             return Ok(products);
         }
+
+        // GET: api/products/cart
+        [HttpGet("cart")]
+        public ActionResult<IEnumerable<CartItem>> GetCartItems()
+        {
+            return Ok(cart ?? new List<CartItem>());
+        }
+
         // POST: api/products/addtocart/{id}
         [HttpPost("addtocart/{id}")]
         public IActionResult AddToCart(int id)
@@ -49,14 +56,55 @@ namespace ProdutosAPI.Controllers
                 });
             }
 
-            return Ok(cart);
+            // Recalcula o total
+            var total = cart.Sum(item => item.Price * item.Quantity);
+
+            return Ok(new { Cart = cart, Total = total });
         }
-        // GET: api/products/cart
-        [HttpGet("cart")]
-        public ActionResult<IEnumerable<CartItem>> GetCartItems()
+
+        // POST: api/products/incrementcart/{id}
+        [HttpPost("incrementcart/{id}")]
+        public IActionResult IncrementCartItem(int id)
         {
-            return Ok(cart);
+            var cartItem = cart.FirstOrDefault(c => c.ProductId == id);
+
+            if (cartItem == null)
+            {
+                return NotFound("Item não encontrado no carrinho");
+            }
+
+            cartItem.Quantity++; // Incrementa a quantidade
+
+            // Recalcula o total
+            var total = cart.Sum(item => item.Price * item.Quantity);
+
+            return Ok(new { Cart = cart, Total = total });
+        }
+
+        // POST: api/products/decrementcart/{id}]
+        [HttpPost("decrementcart/{id}")]
+        public IActionResult DecrementCartItem(int id)
+        {
+            var cartItem = cart.FirstOrDefault(c => c.ProductId == id);
+
+            if (cartItem == null)
+            {
+                return NotFound("Item não encontrado no carrinho");
+            }
+
+            if (cartItem.Quantity > 1)
+            {
+                cartItem.Quantity--; // Decrementa a quantidade
+            }
+            else
+            {
+                cart.Remove(cartItem); // Remove o item se a quantidade for 1
+            }
+
+            // Recalcula o total
+            var total = cart.Sum(item => item.Price * item.Quantity);
+
+            return Ok(new { Cart = cart, Total = total });
         }
     }
 }
-
